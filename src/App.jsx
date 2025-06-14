@@ -5,7 +5,7 @@ import Main from './components/Main';
 function App() {
   useEffect(() => {
     const API_URL = import.meta.env.VITE_API_URL;
-    fetch(`${API_URL}/api/health`, {
+    fetch(`${API_URL}/api/chat`, {
       method: 'GET',
       credentials: 'include', // Only if backend expects cookies/auth
       headers: {
