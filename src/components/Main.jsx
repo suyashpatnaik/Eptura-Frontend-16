@@ -97,18 +97,12 @@ export default function Main() {
     setSources([]);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/chat`, {
+      const response = await fetch(`${API_BASE_URL}/chat`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          message: inputMessage,
-          conversation: messages.slice(-10).map(msg => ({
-            role: msg.sender === 'user' ? 'user' : 'assistant',
-            content: msg.text
-          }))
-        })
+        body: JSON.stringify({ message: inputMessage })
       });
 
       if (!response.ok) {
