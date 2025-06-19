@@ -96,6 +96,42 @@ export default function Main() {
     setIsTyping(true);
     setSources([]);
 
+    // 👉 New part — add this before calling /api/chat:
+    if (
+      inputMessage.toLowerCase().includes('diagram') ||
+      inputMessage.toLowerCase().includes('image') ||
+      inputMessage.toLowerCase().includes('show')
+    ) {
+      try {
+        const askRes = await fetch(`${API_BASE_URL}/ask`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: inputMessage }),
+        });
+        const askData = await askRes.json();
+
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: Date.now() + 2,
+            text: askData.text,
+            image: askData.image,
+            imageAlt: askData.imageAlt,
+            sender: 'bot',
+            timestamp: new Date(),
+          },
+        ]);
+        setIsLoading(false);
+        setIsTyping(false);
+        return;
+      } catch (error) {
+        console.error('Error calling /api/ask:', error);
+        setIsLoading(false);
+        setIsTyping(false);
+        return;
+      }
+    }
+
     try {
       const response = await fetch(`${API_BASE_URL}/chat`, {
         method: 'POST',
