@@ -7,7 +7,7 @@ export default function ChatBubble({ message }) {
       {message.image && (
         <img
           src={`/assets/img/${message.image}`}
-          alt={message.imageAlt || "Image"}
+          alt={message.imageAlt || "Image" || "image" || "IMAGE"}
           className="rounded-xl max-w-full mt-2"
         />
       )}
