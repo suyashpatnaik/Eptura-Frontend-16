@@ -6,9 +6,9 @@ function ChatBubble({ message }) {
       <div>{message.text}</div>
       {message.image && (
         <img
-          src={`/assets/img/${message.image}`}
-          alt={message.imageAlt || "Image" || "image" || "IMAGE" || "images" || "Images" || "IMAGES"}
-          className="rounded-xl max-w-full mt-2"
+          src={message.image}
+          alt={message.imageAlt || "AI image"}
+          style={{ maxWidth: "300px" }}
         />
       )}
     </div>
